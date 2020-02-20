@@ -15,10 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/cliente', function () {
-    return view('cliente');
-});
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/role', 'RoleController@index')->name('roles.role');
+Route::post('/role','RoleController@crear')->name('roles.insertar');
+Route::get('/role/editar/{id}','RoleController@editar')->name('roles.editar');
+Route::put('/role/editar/{id}','RoleController@update')->name('roles.update');
+Route::delete('/role/eliminar/{id}','RoleController@eliminar')->name('roles.eliminar');
+
+Route::get('/cliente', 'ClienteController@index')->name('cliente');
