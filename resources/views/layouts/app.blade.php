@@ -74,7 +74,7 @@
 
         <main class="py-4">  
             <div class="container">
-                <a href="{{ route('cliente') }}" class="btn btn-primary">Clientes</a>
+                <a href="{{ route('clientes.cliente') }}" class="btn btn-primary">Clientes</a>
                 <a href="{{ route('roles.role') }}" class="btn btn-primary">Role</a>
                 <a href="" class="btn btn-primary">Usuarios</a>
             </div>      
