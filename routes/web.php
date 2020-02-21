@@ -33,3 +33,9 @@ Route::post('/cliente','ClienteController@crear')->name('clientes.insertar');
 Route::get('/cliente/editar/{id}','ClienteController@editar')->name('clientes.editar');
 Route::put('/cliente/editar/{id}','ClienteController@update')->name('clientes.update');
 Route::delete('/cliente/eliminar/{id}','ClienteController@eliminar')->name('clientes.eliminar');
+
+Route::get('/empleado', 'EmpleadoController@index')->name('empleados.empleado');
+Route::post('/empleado','EmpleadoController@crear')->name('empleados.insertar');
+Route::get('/empleado/editar/{id}','EmpleadoController@editar')->name('empleados.editar');
+Route::put('/empleado/editar/{id}','EmpleadoController@update')->name('empleados.update');
+Route::delete('/empleado/eliminar/{id}','EmpleadoController@eliminar')->name('empleados.eliminar');
