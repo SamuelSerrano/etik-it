@@ -39,3 +39,15 @@ Route::post('/empleado','EmpleadoController@crear')->name('empleados.insertar');
 Route::get('/empleado/editar/{id}','EmpleadoController@editar')->name('empleados.editar');
 Route::put('/empleado/editar/{id}','EmpleadoController@update')->name('empleados.update');
 Route::delete('/empleado/eliminar/{id}','EmpleadoController@eliminar')->name('empleados.eliminar');
+
+Route::get('/categoria', 'CategoriaController@index')->name('categorias.categoria');
+Route::post('/categoria','CategoriaController@crear')->name('categorias.insertar');
+Route::get('/categoria/editar/{id}','CategoriaController@editar')->name('categorias.editar');
+Route::put('/categoria/editar/{id}','CategoriaController@update')->name('categorias.update');
+Route::delete('/categoria/eliminar/{id}','CategoriaController@eliminar')->name('categorias.eliminar');
+
+Route::get('/producto', 'ProductoController@index')->name('productos.producto');
+Route::post('/producto','ProductoController@crear')->name('productos.insertar');
+Route::get('/producto/editar/{id}','ProductoController@editar')->name('productos.editar');
+Route::put('/producto/editar/{id}','ProductoController@update')->name('productos.update');
+Route::delete('/producto/eliminar/{id}','ProductoController@eliminar')->name('productos.eliminar');

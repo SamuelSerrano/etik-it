@@ -78,6 +78,8 @@
                 <a href="{{ route('clientes.cliente') }}" class="btn btn-primary">Clientes</a>
                 <a href="{{ route('roles.role') }}" class="btn btn-primary">Role</a>
                 <a href="{{ route('empleados.empleado') }}" class="btn btn-primary">Empleados</a>
+                <a href="{{ route('categorias.categoria') }}" class="btn btn-primary">Categorias</a>
+                <a href="{{ route('productos.producto') }}" class="btn btn-primary">Productos</a>
             </div>    
             <div class="container">    
                 @yield('content')
