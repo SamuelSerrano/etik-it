@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Etik-it') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Etik-It') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -42,12 +42,7 @@
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                            </li>                           
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -73,14 +68,17 @@
         </nav>
 
         <main class="py-4">  
+            @guest
             
+            @else
             <div class="container">
                 <a href="{{ route('clientes.cliente') }}" class="btn btn-primary">Clientes</a>
                 <a href="{{ route('roles.role') }}" class="btn btn-primary">Role</a>
                 <a href="{{ route('empleados.empleado') }}" class="btn btn-primary">Empleados</a>
                 <a href="{{ route('categorias.categoria') }}" class="btn btn-primary">Categorias</a>
                 <a href="{{ route('productos.producto') }}" class="btn btn-primary">Productos</a>
-            </div>    
+            </div> 
+            @endguest  
             <div class="container">    
                 @yield('content')
             </div>

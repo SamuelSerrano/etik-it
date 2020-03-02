@@ -1,11 +1,13 @@
 <?php
 
 namespace App;
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
-class Empleado extends Model
+class Empleado extends Authenticatable
 {
+    use Notifiable;
     //
     protected $table = "empleados";
     protected $fillable = [
