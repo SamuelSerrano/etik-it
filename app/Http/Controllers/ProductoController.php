@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App;
-
+use \Datetime;
+use \stdClass;
 class ProductoController extends Controller
 {
        /**
@@ -81,4 +82,29 @@ class ProductoController extends Controller
         $row_delete = App\Producto::where('producto_id','=',$producto_id)->delete();
         return back()->with('mensaje','Producto eliminado con éxito!!');
     }
+
+    public function Cola(){       
+        $obj_productos = App\Producto::all();
+        return view('productos.cola',compact('obj_productos'));
+    }
+
+    public function generarCola(Request $req){
+        $req->validate([
+            'cantidad' => 'required|numeric',            
+            'producto_id' => 'required',
+        ]);
+        $timestamp = strtotime("now");
+        $arr_cola = array();  
+        for($i=1;$i<=$req->cantidad;$i++)
+        {
+            $arr_cola[$i] = 'PRD-'.$timestamp.'-'.$req->producto_id.'-'.$i;
+            
+            
+        }
+        $obj_cola = collect($arr_cola);
+        return view('productos.plantilla',compact('obj_cola'));
+        //return $obj_cola;
+    }
+
+    
 }

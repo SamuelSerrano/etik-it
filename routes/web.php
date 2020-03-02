@@ -51,3 +51,6 @@ Route::post('/producto','ProductoController@crear')->name('productos.insertar');
 Route::get('/producto/editar/{id}','ProductoController@editar')->name('productos.editar');
 Route::put('/producto/editar/{id}','ProductoController@update')->name('productos.update');
 Route::delete('/producto/eliminar/{id}','ProductoController@eliminar')->name('productos.eliminar');
+Route::get('/producto/cola', 'ProductoController@Cola')->name('productos.cola');
+Route::post('/producto/generarcola', 'ProductoController@generarCola')->name('productos.generarCola');
+

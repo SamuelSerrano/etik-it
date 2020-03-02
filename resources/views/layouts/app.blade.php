@@ -69,7 +69,9 @@
 
         <main class="py-4">  
             @guest
-            
+            <div class="container">
+                <a href="{{ route('productos.cola') }}" class="btn btn-primary">Generar Cola Productos</a>
+            </div> 
             @else
             <div class="container">
                 <a href="{{ route('clientes.cliente') }}" class="btn btn-primary">Clientes</a>
