@@ -1,14 +1,13 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-  <div class="col-md-12">    
+  <div class="col-md-5">    
       @foreach($obj_cola->chunk(50) as $chunk)
         @foreach($chunk as $item)
-        {!! QrCode::size(150)
-        ->errorCorrection('H')
-        ->generate($item); !!}
+        <p>{{$item}}</p>
         @endforeach
       @endforeach
   </div>
 </div>
+
 @endsection

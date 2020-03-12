@@ -8,7 +8,7 @@ class Producto extends Model
 {
     protected $table = "productos";
     protected $fillable = [
-        'nombre', 'lote', 'categoria_id', 'activo'
+        'nombre', 'lote','descripcion','url_fabricante', 'categoria_id', 'activo'
     ];
 
     protected $guarded = ['producto_id']; 

@@ -11,6 +11,9 @@
 @endif
 <form action="{{route('productos.insertar')}}" method="POST">
 @csrf
+
+
+<input type="text" name="nombre" placeholder="Nombre" value="{{old('nombre')}}" class="form-control mb-2">
 @error('nombre')
 <div class="alert alert-danger">
 Se debe ingresar el nombre del producto
@@ -19,6 +22,7 @@ Se debe ingresar el nombre del producto
   </button>
 </div>
 @enderror
+<input type="text" name="lote" placeholder="Lote" value="{{old('lote')}}" class="form-control mb-2">
 @error('lote')
 <div class="alert alert-danger">
 Se debe ingresar un lote
@@ -27,17 +31,24 @@ Se debe ingresar un lote
   </button>
 </div>
 @enderror
-@error('categoria_id')
+<input type="text" name="descripcion" placeholder="Descripcion" value="{{old('descripcion')}}" class="form-control mb-2">
+@error('descripcion')
 <div class="alert alert-danger">
-Se debe seleccionar una categoria.
+Se debe ingresar una descripción max(100) caracteres.
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 @enderror
-
-<input type="text" name="nombre" placeholder="Nombre" value="{{old('nombre')}}" class="form-control mb-2">
-<input type="text" name="lote" placeholder="Lote" value="{{old('lote')}}" class="form-control mb-2">
+<input type="text" name="url_fabricante" placeholder="Sitio Web" value="{{old('url_fabricante')}}" class="form-control mb-2">
+@error('url_fabricante')
+<div class="alert alert-danger">
+Se debe ingresar una url válida.
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@enderror
 <div class="form-check">
   <input type="checkbox" class="switch-input" name="activo" value="1" {{old('activo') ? 'checked="checked"' : '0'}} />
   <label class="form-check-label" for="activo">Activo?</label>
@@ -52,6 +63,14 @@ Se debe seleccionar una categoria.
         </option>
         @endforeach
     </select>
+    @error('categoria_id')
+<div class="alert alert-danger">
+Se debe seleccionar una categoria.
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@enderror
 </div>
 
 <button class="btn btn-primary btn-block" type="submit">Agregar</button>

@@ -17,6 +17,8 @@ class CreateProductosTable extends Migration
             $table->bigIncrements('producto_id');
             $table->integer('categoria_id');
             $table->string('nombre');
+            $table->string('descripcion');
+            $table->string('url_fabricante');
             $table->string('lote');
             $table->boolean('activo');
             $table->timestamps();
