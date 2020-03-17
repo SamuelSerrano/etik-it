@@ -22,15 +22,6 @@ Se debe ingresar el nombre del producto
   </button>
 </div>
 @enderror
-<input type="text" name="lote" placeholder="Lote" value="{{old('lote')}}" class="form-control mb-2">
-@error('lote')
-<div class="alert alert-danger">
-Se debe ingresar un lote
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-@enderror
 <input type="text" name="descripcion" placeholder="Descripcion" value="{{old('descripcion')}}" class="form-control mb-2">
 @error('descripcion')
 <div class="alert alert-danger">
@@ -79,8 +70,7 @@ Se debe seleccionar una categoria.
   <thead>
     <tr>
       <th scope="col">id</th>
-      <th scope="col">Nombre</th> 
-      <th scope="col">Lote</th>      
+      <th scope="col">Nombre</th>     
       <th scope="col">Categoria</th>     
       <th scope="col">Acciones</th>
     </tr>
@@ -90,7 +80,6 @@ Se debe seleccionar una categoria.
     <tr>
       <th scope="row">{{$producto->producto_id}}</th>
       <td>{{$producto->nombre}}</td>
-      <td>{{$producto->lote}}</td> 
       <td>{{$producto->nombrecat}}</td>             
     <td>
       <a href="{{route('productos.editar',$producto->producto_id)}}" 

@@ -19,7 +19,6 @@ class CreateProductosTable extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->string('url_fabricante');
-            $table->string('lote');
             $table->boolean('activo');
             $table->timestamps();
         });

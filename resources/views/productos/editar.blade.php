@@ -25,15 +25,6 @@
     </button>
     </div>
     @enderror
-    <input type="text" name="lote" placeholder="Lote" value="{{$obj_productos[0]->lote}}" class="form-control mb-2">
-    @error('lote')
-    <div class="alert alert-danger">
-    Se debe ingresar el lote del producto
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-    @enderror
     <input type="text" name="descripcion" placeholder="Descripción" value="{{$obj_productos[0]->descripcion}}" class="form-control mb-2">
     @error('descripcion')
     <div class="alert alert-danger">

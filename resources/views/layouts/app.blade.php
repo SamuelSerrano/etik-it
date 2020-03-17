@@ -11,13 +11,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
@@ -75,6 +76,7 @@
                 <a href="{{ route('empleados.empleado') }}" class="btn btn-primary">Empleados</a>
                 <a href="{{ route('categorias.categoria') }}" class="btn btn-primary">Categorias</a>
                 <a href="{{ route('productos.producto') }}" class="btn btn-primary">Productos</a>
+                <a href="{{ route('lotes.lote') }}" class="btn btn-primary">Lotes</a>
                 <a href="{{ route('productos.cola') }}" class="btn btn-primary">Generar Cola Productos</a>
             </div> 
             @else
@@ -84,6 +86,8 @@
                 <a href="{{ route('empleados.empleado') }}" class="btn btn-primary">Empleados</a>
                 <a href="{{ route('categorias.categoria') }}" class="btn btn-primary">Categorias</a>
                 <a href="{{ route('productos.producto') }}" class="btn btn-primary">Productos</a>
+                <a href="{{ route('lotes.lote') }}" class="btn btn-primary">Lotes</a>
+                <a href="{{ route('productos.cola') }}" class="btn btn-primary">Generar Cola Productos</a>
             </div> 
             @endguest  
             <div class="container">    

@@ -42,15 +42,13 @@ class ProductoController extends Controller
 
         $req->validate([
             'nombre' => 'required',
-            'lote' => 'required',
             'descripcion' => 'required|max:100',
-            'url_fabricante' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+            'url_fabricante' => 'required|url',
             'categoria_id' => 'required',            
         ]);
 
         $productoNew = new App\Producto;
         $productoNew->nombre = $req->nombre;
-        $productoNew->lote = $req->lote; 
         $productoNew->descripcion = $req->descripcion; 
         $productoNew->url_fabricante = $req->url_fabricante;     
         $productoNew->activo = $req->has('activo');   
@@ -73,15 +71,14 @@ class ProductoController extends Controller
 
     public function update(Request $req, $producto_id){
         $req->validate([
-            'nombre' => 'required',
-            'lote' => 'required',
+            'nombre' => 'required',            
             'descripcion' => 'required|max:100',
-            'url_fabricante' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',            
+            'url_fabricante' => 'required|url',            
             'categoria_id' => 'required',
         ]);
         $row_update = App\Producto::
         where('producto_id','=',$producto_id)
-        ->update(array('nombre'=>$req->nombre, 'lote'=> $req->lote, 'descripcion'=> $req->descripcion, 
+        ->update(array('nombre'=>$req->nombre, 'descripcion'=> $req->descripcion, 
                        'url_fabricante'=> $req->url_fabricante,'categoria_id'=> $req->categoria_id, 'activo'=> $req->has('activo')));
         return back()->with('mensaje','Producto actualizado con éxito!!');
     }
@@ -92,36 +89,54 @@ class ProductoController extends Controller
     }
 
     public function Cola(){       
-        $obj_productos = App\Producto::all();
+        $obj_productos = DB::table('lote_productos')
+        ->join('productos', 'lote_productos.producto_id','=','productos.producto_id')
+        ->select(DB::raw("CONCAT(productos.nombre,' ',lote_productos.lote) AS lote"),'lote_productos.lote_id')
+        ->orderBy('lote')
+        ->get();
         return view('productos.cola',compact('obj_productos'));
     }
 
     public function generarCola(Request $req){
         $req->validate([
             'cantidad' => 'required|numeric',            
-            'producto_id' => 'required',
+            'lote_id' => 'required',
         ]);
 
-        $obj_productos = DB::table('productos')        
-        ->where('producto_id','=',$req->producto_id)
+        $obj_lote =  $obj_lotes = DB::table('lote_productos')
+        ->join('productos', 'lote_productos.producto_id','=','productos.producto_id')
+        ->select('lote_productos.*','productos.nombre AS producto','productos.url_fabricante AS url')
+        ->where('lote_id','=',$req->lote_id)
         ->get();
         $timestamp = strtotime("now");
-        $arr_cola = array();  
+        $arr_cola = array(); 
+        $nombre_archivo =  $obj_lote[0]->lote."_".$timestamp.".csv";
+        $obj_csv = fopen('files_csv/'.$nombre_archivo,"a") or die ("Error al crear el archivo");
         for($i=1;$i<=$req->cantidad;$i++)
         {
             $strMask = 'PRD'.$timestamp
             .'|'.$i
-            .'|'.$obj_productos[0]->producto_id
+            .'|'.$obj_lote[0]->producto_id
             //.'-'.$obj_productos[0]->descripcion
-            .'|'.$obj_productos[0]->lote
-            .'|'.$obj_productos[0]->url_fabricante;
-            $arr_cola[$i] = $strMask;
-            //$arr_cola[$i] = Hash::make($strMask);
+            .'|'.$obj_lote[0]->lote
+            .'|'.date('dmY', strtotime($obj_lote[0]->fechaVencimiento))
+            .'|'.$obj_lote[0]->url;
+            //$arr_cola[$i] = $strMask;
+            $arr_cola[$i] = Hash::make($strMask);
             
+            //SDSE - 17032020 Se inserta cada registro creado.
+            $colaNew = new App\ColaProducto;
+            $colaNew->lote_id = $obj_lote[0]->lote_id;
+            $colaNew->producto_id = $obj_lote[0]->producto_id; 
+            $colaNew->hash_cadena = Hash::make($strMask);                   
+            $colaNew->uid = $strMask;        
+            $colaNew->save();
             
+            fwrite($obj_csv, $strMask."\n");
         }
+        
         $obj_cola = collect($arr_cola);
-        return view('productos.plantilla',compact('obj_cola'));
+        return view('productos.plantilla',compact('obj_cola','nombre_archivo'));
         //return $obj_cola;
     }
 

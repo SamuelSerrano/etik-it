@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
 <h1 class="col m-5">Generar cola de Productos</h1>
@@ -19,9 +20,9 @@ Se debe ingresar la cantidad de productos a generar QR.
   </button>
 </div>
 @enderror
-@error('producto_id')
+@error('lote_id')
 <div class="alert alert-danger">
-Se debe seleccionar un producto.
+Se debe seleccionar un lote de productos.
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -30,12 +31,12 @@ Se debe seleccionar un producto.
 
 <input type="text" name="cantidad" placeholder="Cantidad del Lote" value="{{old('cantidad')}}" class="form-control mb-2">
 <div class="form-group">
-    <select name="producto_id" placeholder="Producto" class="form-control">
+    <select name="lote_id" placeholder="Producto Lote" class="form-control">
         <option value="" hidden>Seleccione Producto</option>
         @foreach($obj_productos as $producto)
-        <option value="{{$producto->producto_id}}"
-                       {{ (collect(old('producto_id'))->contains($producto->producto_id)) ? 'selected':'' }}>
-                       {{$producto->nombre}}
+        <option value="{{$producto->lote_id}}"
+                       {{ (collect(old('lote_id'))->contains($producto->lote_id)) ? 'selected':'' }}>
+                       {{$producto->lote}}
         </option>
         @endforeach
     </select>

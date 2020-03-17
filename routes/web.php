@@ -54,3 +54,8 @@ Route::delete('/producto/eliminar/{id}','ProductoController@eliminar')->name('pr
 Route::get('/producto/cola', 'ProductoController@Cola')->name('productos.cola');
 Route::post('/producto/generarcola', 'ProductoController@generarCola')->name('productos.generarCola');
 
+Route::get('/lote', 'LoteProductoController@index')->name('lotes.lote');
+Route::post('/lote','LoteProductoController@crear')->name('lotes.insertar');
+Route::get('/lote/editar/{id}','LoteProductoController@editar')->name('lotes.editar');
+Route::put('/lote/editar/{id}','LoteProductoController@update')->name('lotes.update');
+Route::delete('/lote/eliminar/{id}','LoteProductoController@eliminar')->name('lotes.eliminar');
