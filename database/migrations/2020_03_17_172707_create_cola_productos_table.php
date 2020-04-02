@@ -18,7 +18,7 @@ class CreateColaProductosTable extends Migration
             $table->integer('lote_id');
             $table->integer('producto_id');
             $table->timestamp('fechaRegistro');
-            $table->string('hash_cadena');
+            $table->text('hash_cadena');
             $table->string('uid');
             $table->timestamps();
         });

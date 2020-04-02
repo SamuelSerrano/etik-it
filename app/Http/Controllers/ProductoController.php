@@ -122,18 +122,22 @@ class ProductoController extends Controller
             .'|'.date('dmY', strtotime($obj_lote[0]->fechaVencimiento))
             .'|'.$obj_lote[0]->url;
             //$arr_cola[$i] = $strMask;
-            $arr_cola[$i] = base64_encode($strMask);
+
+
+            $strCipher = encrypt($strMask);
+            $arr_cola[$i] = $strCipher;
             
+             
             //SDSE - 17032020 Se inserta cada registro creado.
             $colaNew = new App\ColaProducto;
             $colaNew->lote_id = $obj_lote[0]->lote_id;
             $colaNew->producto_id = $obj_lote[0]->producto_id; 
-            $colaNew->hash_cadena = base64_encode($strMask);                   
+            $colaNew->hash_cadena = $strCipher;                   
             $colaNew->uid = $strMask;        
             $colaNew->save();
             
             //fwrite($obj_csv, $strMask."\n");
-            fwrite($obj_csv, base64_encode($strMask)."\n");
+            fwrite($obj_csv, $strCipher."\n");
         }
         
         $obj_cola = collect($arr_cola);
