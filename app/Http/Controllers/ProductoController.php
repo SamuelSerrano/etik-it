@@ -105,7 +105,7 @@ class ProductoController extends Controller
 
         $obj_lote =  $obj_lotes = DB::table('lote_productos')
         ->join('productos', 'lote_productos.producto_id','=','productos.producto_id')
-        ->select('lote_productos.*','productos.nombre AS producto','productos.url_fabricante AS url')
+        ->select('lote_productos.*','productos.nombre AS producto', 'productos.descripcion AS descripcion','productos.url_fabricante AS url')
         ->where('lote_id','=',$req->lote_id)
         ->get();
         $timestamp = strtotime("now");
@@ -115,9 +115,10 @@ class ProductoController extends Controller
         for($i=1;$i<=$req->cantidad;$i++)
         {
             $strMask = 'PRD'.$timestamp
-            .'|'.$i
+            .'-'.$i
             .'|'.$obj_lote[0]->producto_id
-            //.'-'.$obj_productos[0]->descripcion
+            .'|'.$obj_lote[0]->descripcion
+            .'|'.$obj_lote[0]->producto
             .'|'.$obj_lote[0]->lote
             .'|'.date('dmY', strtotime($obj_lote[0]->fechaVencimiento))
             .'|'.$obj_lote[0]->url;
