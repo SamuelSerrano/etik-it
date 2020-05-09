@@ -34,8 +34,6 @@ class ProductoController extends Controller
 
         $obj_categorias = App\Categoria::all();
         return view('productos.producto',compact('obj_productos','obj_categorias'));
-        //return $obj_productos;
-       
     }
 
     public function crear(Request $req){
@@ -122,10 +120,8 @@ class ProductoController extends Controller
             .'|'.$obj_lote[0]->lote
             .'|'.date('dmY', strtotime($obj_lote[0]->fechaVencimiento))
             .'|'.$obj_lote[0]->url;
-            //$arr_cola[$i] = $strMask;
 
 
-            //$strCipher = Crypt::encrypt($strMask);
             $strCipher = base64_encode($strMask);
             $arr_cola[$i] = $strCipher;
             
@@ -138,13 +134,12 @@ class ProductoController extends Controller
             $colaNew->uid = $strMask;        
             $colaNew->save();
             
-            //fwrite($obj_csv, $strMask."\n");
+
             fwrite($obj_csv, $strCipher."\n");
         }
         
         $obj_cola = collect($arr_cola);
         return view('productos.plantilla',compact('obj_cola','nombre_archivo'));
-        //return $obj_cola;
     }
 
     
